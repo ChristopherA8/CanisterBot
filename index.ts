@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const { token } = require("./config.json");
-const fetch = require("node-fetch");
 
 ("https://api.canister.me/v1/community/packages/search?query=");
 
@@ -11,6 +10,7 @@ client.on(`ready`, () => {
 
 client.on(`message`, (msg) => {
   if (msg.author.bot) return;
+  const fetch = require(`node-fetch`);
   const regex = /\[\[.*\]\]/g;
   if (msg.content.match(regex)) {
     let commandContent = msg.content.match(regex);
