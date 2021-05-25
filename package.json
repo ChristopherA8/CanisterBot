@@ -9,6 +9,7 @@
   "author": "Chr1s",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "discord.js": "^12.5.3",
     "node-fetch": "^2.6.1"
   },
