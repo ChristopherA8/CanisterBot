@@ -1,0 +1,18 @@
+{
+  "name": "canister",
+  "version": "1.0.0",
+  "description": "Discord bot for the canister tweak db",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chr1s",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1"
+  }
+}
