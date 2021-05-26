@@ -1,17 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const { token } = require("./config.json");
-const axios = require("axios").default;
-const fetch = require("node-fetch");
-
-// Imma work on this tomorrow, cause the api was down
-// Todo list:
-// use axios
-// add page feature
-// :)
-
-("https://api.canister.me/v1/community/packages/search?query=");
-("https://api.canister.me/v1/community/packages/search?query=(query)&searchFields=packageId,name,author,maintainer&responseFields=packageId,name,description,icon,repositoryURI,author,latestVersion,nativeDepiction,depiction");
+const axios = require("axios");
 
 client.on(`ready`, () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -28,13 +18,13 @@ client.on(`message`, (msg) => {
       .replace(/\[/g, "")
       .replace(/\]/g, "");
 
-    fetch(
-      `https://api.canister.me/v1/community/packages/search?query=${tweakName}&searchFields=packageId,name&responseFields=packageId,name,price,description,icon,repositoryURI,author,latestVersion,nativeDepiction,depiction,versions`
-    )
-      .then((res) => res.json())
-      .then((out) => {
-        console.log(out.data.length);
-        const package = out.data[0];
+    axios
+      .get(
+        `https://api.canister.me/v1/community/packages/search?query=${tweakName}&searchFields=packageId,name&responseFields=packageId,name,price,description,icon,repositoryURI,author,latestVersion,nativeDepiction,depiction,versions`
+      )
+      .then(function (res) {
+        let response = res.data;
+        const package = response.data[0];
         if (!package) throw new Error("Package not found");
 
         // Why why why
@@ -83,12 +73,12 @@ client.on(`message`, (msg) => {
               inline: false,
             }
           )
-          .setFooter(out.date, icon ? icon : ``);
+          .setFooter(response.date, icon ? icon : ``);
 
         msg.channel
           .send(embed)
           .then((message) => {
-            if (out.data.length <= 1) return;
+            if (response.data.length <= 1) return;
             message.react(`◀`);
             message.react(`▶`);
 
@@ -122,13 +112,13 @@ client.on(`message`, (msg) => {
               }
               if (
                 reaction.emoji.name === "▶" &&
-                currentPage < out.data.length - 1
+                currentPage < response.data.length - 1
               ) {
                 currentPage++;
                 console.log(currentPage);
               }
 
-              let package = out.data[currentPage];
+              let package = response.data[currentPage];
               // Why why why
               let icon = package.icon;
               if (icon) {
@@ -179,7 +169,7 @@ client.on(`message`, (msg) => {
                     inline: false,
                   }
                 )
-                .setFooter(out.date, icon ? icon : ``);
+                .setFooter(response.date, icon ? icon : ``);
 
               message.edit(embed);
             });
