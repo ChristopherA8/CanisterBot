@@ -94,7 +94,7 @@ client.on(`message`, (msg) => {
             });
 
             collector.on("collect", async (reaction, user) => {
-              console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
+              // console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
               // Remove the reaction when changing the page
               const userReactions = message.reactions.cache.filter((reaction) =>
                 reaction.users.cache.has(user.id)
@@ -108,14 +108,14 @@ client.on(`message`, (msg) => {
               }
               if (reaction.emoji.name === "◀" && currentPage > 0) {
                 currentPage--;
-                console.log(currentPage);
+                // console.log(currentPage);
               }
               if (
                 reaction.emoji.name === "▶" &&
                 currentPage < response.data.length - 1
               ) {
                 currentPage++;
-                console.log(currentPage);
+                // console.log(currentPage);
               }
 
               let package = response.data[currentPage];
@@ -175,7 +175,7 @@ client.on(`message`, (msg) => {
             });
 
             collector.on("end", (collected) => {
-              console.log(`Collected ${collected.size} items`);
+              // console.log(`Collected ${collected.size} items`);
               message.reactions
                 .removeAll()
                 .catch((error) =>
