@@ -89,12 +89,13 @@ client.on(`message`, (msg) => {
               );
             };
 
+            // Should I make this longer?
+            // This is the timeout for the page reactions
             const collector = message.createReactionCollector(filter, {
               time: 30000,
             });
 
             collector.on("collect", async (reaction, user) => {
-              // console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
               // Remove the reaction when changing the page
               const userReactions = message.reactions.cache.filter((reaction) =>
                 reaction.users.cache.has(user.id)
