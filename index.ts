@@ -39,7 +39,9 @@ client.on(`message`, (msg) => {
 
         // Why why why
         let icon = package.icon;
-        if (package.icon.includes(`file://`)) icon = "";
+        if (icon) {
+          if (package.icon.includes(`file://`)) icon = "";
+        }
 
         const embed = new Discord.MessageEmbed()
           .setColor("#0099ff")
@@ -120,7 +122,7 @@ client.on(`message`, (msg) => {
               }
               if (
                 reaction.emoji.name === "▶" &&
-                currentPage < out.data.length
+                currentPage < out.data.length - 1
               ) {
                 currentPage++;
                 console.log(currentPage);
@@ -129,7 +131,9 @@ client.on(`message`, (msg) => {
               let package = out.data[currentPage];
               // Why why why
               let icon = package.icon;
-              if (package.icon.includes(`file://`)) icon = "";
+              if (icon) {
+                if (package.icon.includes(`file://`)) icon = "";
+              }
 
               const embed = new Discord.MessageEmbed()
                 .setColor("#0099ff")
