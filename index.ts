@@ -89,8 +89,6 @@ client.on(`message`, (msg) => {
               );
             };
 
-            // Should I make this longer?
-            // This is the timeout for the page reactions
             const collector = message.createReactionCollector(filter, {
               time: 30000,
             });
