@@ -1,3 +1,9 @@
+/*
+ * Discord bot for api.canister.me
+ *
+ * Developed by Chr1s (christopher#8888)
+ */
+
 const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const client = new Client({ intents: [Intents.NON_PRIVILEGED] });
