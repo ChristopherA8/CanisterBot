@@ -4,7 +4,10 @@ const { token } = require("./config.json");
 const axios = require("axios");
 
 client.on(`ready`, () => {
-  console.log(`Logged in as ${client.user.tag}`);
+  console.log(
+    `Logged in as ${client.user.tag} in ${client.guilds.cache.size} guilds`
+  );
+  client.user.setActivity(`in ${client.guilds.cache.size} server`);
 });
 
 client.on(`message`, (msg) => {
